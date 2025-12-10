@@ -8,7 +8,7 @@
         state: absent
     - name: enable nodejs-18
       ansible.buldin.dnf:
-        name: nodejs:18
+        name: nodejs
         enabled: yes
     - name: install nodejs18
       ansible.builtin.dnf:
