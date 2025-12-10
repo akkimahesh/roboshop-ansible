@@ -2,17 +2,11 @@
   hosts: localhost
   become: yes
   tasks:
-    - name: disable nodejs 
+    - name: disable nodejs and enable nodejs 18
+      ansible.builtin.shell: dnf module disable nodejs -y && dnf module enable nodejs:18 -y
+    - name: install nodejs
       ansible.builtin.dnf:
         name: nodejs
-        disable: yes
-    - name: enable nodejs-18
-      ansible.buldin.dnf:
-        name: nodejs:18
-        enabled: yes
-    - name: install nodejs18
-      ansible.builtin.dnf:
-        name: nodejs:18
         state: present
     - name: Create a user roboshop
       ansible.builtin.user:
