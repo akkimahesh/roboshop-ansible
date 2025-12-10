@@ -24,3 +24,19 @@
         src: /tmp/catalogue.zip
         dest: /app 
         remote_src: no
+    - name: Install npm dependencies
+      ansible.builtin.command: npm install
+      args:
+        chdir: /app
+    - name: setup symstemd for catalogue service
+      ansible.builtin.copy:
+        src: catalogue.service
+        dest: /etc/systemd/system/catalogue.service
+    - name: Daemon-relod
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+    - name: enable and start catalogue
+      ansible.builtin.systemd_service:
+        name: catalogue
+        state: started
+        enabled: true
