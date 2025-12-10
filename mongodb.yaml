@@ -4,8 +4,8 @@
   tasks:
   - name: Copy mongodb configuration file
     ansible.builtin.copy:
-      src: mongo.repo
-      dest: /etc/yum.repos.d/mongo.repo
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
 
   - name: install mongodb
     ansible.builtin.package:
@@ -18,7 +18,7 @@
       state: started
       enabled: yes
 
-  - name: Ensure SELinux is set to enforcing mode
+  - name: replace text
     ansible.builtin.replace:
       path: /etc/mongod.conf
       regexp: '127.0.0.1'
