@@ -5,10 +5,10 @@
     - name: disable nodejs 
       ansible.builtin.dnf:
         name: nodejs
-        state: absent
+        disable: yes
     - name: enable nodejs-18
       ansible.buldin.dnf:
-        name: nodejs
+        name: nodejs:18
         enabled: yes
     - name: install nodejs18
       ansible.builtin.dnf:
