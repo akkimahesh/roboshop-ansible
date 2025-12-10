@@ -47,7 +47,7 @@
 
     - name: Install mongodb client
       ansible.builtin.package:
-        name: mongodb-org
+        name: mongodb-org-shell
         state: present
     
     # load catalogue schema
