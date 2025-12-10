@@ -40,3 +40,14 @@
         name: catalogue
         state: started
         enabled: true
+    - name: install mongodb client
+      ansible.builtin.copy:
+        src: mongodb.repo
+        dest: /etc/yum.repos.d/mongo.repo
+
+    - name: install install mongodb shell
+      ansible.builtin.dnf:
+        name: mongodb-org-shell
+        state: present
+    
+    # load catalogue schema
