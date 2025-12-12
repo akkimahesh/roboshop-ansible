@@ -60,4 +60,4 @@
         name: mongodb-org-shell
         state: present
     
-    # load catalogue schema
+    # load catalogue schema when condition matches
