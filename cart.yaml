@@ -1,5 +1,5 @@
-- name: install and configure catalogue
-  hosts: catalogue
+- name: install and configure cart
+  hosts: cart
   become: yes
   tasks:
     - name: disable nodejs and enable nodejs 18
@@ -21,12 +21,12 @@
    
     - name: Download Application
       ansible.builtin.get_url:
-        url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-        dest: /tmp/catalogue.zip
+        url: https://roboshop-builds.s3.amazonaws.com/cart.zip
+        dest: /tmp/cart.zip
    
     - name: Unzip Application
       ansible.builtin.unarchive:
-        src: /tmp/catalogue.zip
+        src: /tmp/cart.zip
         dest: /app 
         remote_src: yes
    
@@ -35,29 +35,17 @@
       args:
         chdir: /app
    
-    - name: setup symstemd for catalogue service
+    - name: setup symstemd for cart service
       ansible.builtin.copy:
-        src: catalogue.service
-        dest: /etc/systemd/system/catalogue.service
+        src: cart.service
+        dest: /etc/systemd/system/cart.service
 
     - name: Daemon-reload
       ansible.builtin.systemd_service:
         daemon_reload: true
   
-    - name: enable and start catalogue
+    - name: enable and start cart
       ansible.builtin.systemd_service:
-        name: catalogue
+        name: cart
         state: started
         enabled: true
-  
-    - name: Copy mongodb repo
-      ansible.builtin.copy:
-        src: mongodb.repo
-        dest: /etc/yum.repos.d/mongodb.repo
-
-    - name: Install mongodb client
-      ansible.builtin.package:
-        name: mongodb-org-shell
-        state: present
-    
-    # load catalogue schema when condition matches
